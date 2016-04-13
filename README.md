@@ -1,9 +1,6 @@
-# Blog OS (A Minimal x86 Kernel)
-[![Build Status](https://travis-ci.org/phil-opp/blog_os.svg?branch=multiboot_bootstrap)](https://travis-ci.org/phil-opp/blog_os/branches)
+# BareOS
 
-This repository contains the source code for the [A Minimal x86 Kernel](http://os.phil-opp.com/multiboot-kernel.html) post of the [Writing an OS in Rust](http://os.phil-opp.com) series.
-
-**Check out the [master branch](https://github.com/phil-opp/blog_os) for more information.**
+This repository contains the source code for a minimal x86 kernel based on (http://os.phil-opp.com/multiboot-kernel.html)
 
 ## Building
 You need to have `nasm`, `grub-mkrescue`, `xorriso`, and `qemu` installed. Then you can run it using `make run`.
