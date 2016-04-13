@@ -27,7 +27,20 @@ SECTIONS {
     *(.text .text.*)
     . = ALIGN(4K);
   }
-
+	
+  .rw : 
+  {
+	*(.data)
+	*(.bss)
+	*(COMMON)
+  }
+  . = ALIGN(4K);
+  heap_low = .;
+  . = . + 0x1000000;
+  heap_top = .;
+  . = . + 0x1000000;
+ stack_top = .; 
+/*
   .data :
   {
     *(.data .data.*)
@@ -38,8 +51,18 @@ SECTIONS {
   {
     *(.bss .bss.*)
     . = ALIGN(4K);
+	end = .;
+	_end = .;
   }
-
+*/
+  /* User_heap_stack section, used to check that there is enough RAM left */
+/*  ._user_heap_stack :
+  {
+    . = ALIGN(4K);
+    PROVIDE ( end = . );
+    PROVIDE ( _end = . );
+  }
+*/
   .data.rel.ro : ALIGN(4K) {
     *(.data.rel.ro.local*) *(.data.rel.ro .data.rel.ro.*)
     . = ALIGN(4K);
