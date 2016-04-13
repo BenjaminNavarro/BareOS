@@ -11,6 +11,12 @@ arch ?= x86_64
 kernel := build/kernel-$(arch).bin
 iso := build/os-$(arch).iso
 
+ifeq ($(shell uname -s),Darwin)
+	gcc_prefix := 'x86_64-elf-'
+else
+	gcc_prefix := ''
+endif
+
 linker_script := src/arch/$(arch)/linker.ld
 grub_cfg := src/arch/$(arch)/grub.cfg
 assembly_source_files := $(wildcard src/arch/$(arch)/*.asm)
@@ -37,7 +43,7 @@ $(iso): $(kernel) $(grub_cfg)
 	@rm -r build/isofiles
 
 $(kernel): $(assembly_object_files) $(linker_script)
-	@x86_64-elf-ld -n -T $(linker_script) -o $(kernel) $(assembly_object_files) src/libmain.a
+	@$(gcc_prefi)ld -n -T $(linker_script) -o $(kernel) $(assembly_object_files) src/libmain.a
 
 # compile assembly files
 build/arch/$(arch)/%.o: src/arch/$(arch)/%.asm
